@@ -1,0 +1,5 @@
+.env
+venv/
+__pycache__/
+currency_rate.json
+*.pyc
