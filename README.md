@@ -1,95 +1,99 @@
+**English** · [Deutsch](README.de.md) · [Русский](README.ru.md)
+
 # Travel Currency Bot
 
-Telegram-бот для управления личными финансами в путешествиях. Конвертирует валюты через реальный API [exchangerate.host](http://api.exchangerate.host) и ведёт учёт расходов в двух валютах одновременно.
+A Telegram bot for managing personal finances while travelling. It converts currencies using the live [exchangerate.host](http://api.exchangerate.host) API and tracks expenses in two currencies at once.
+
+The bot's interface is in Russian.
 
 ---
 
-## Возможности
+## Features
 
-| Функция | Описание |
+| Feature | Description |
 |---------|----------|
-| ✈️ Создание путешествия | Выбери страну отправления и назначения — бот сам найдёт валюты и курс |
-| 💰 Двойной баланс | Остаток всегда отображается в двух валютах |
-| 📝 Учёт расходов | Отправь число — бот конвертирует и спросит, записать ли расход |
-| 📋 История расходов | Детализация по дате, сумме и валюте |
-| 🗺 Несколько поездок | Переключайся между путешествиями |
-| 💱 Изменить курс | Можно вручную задать курс (например, по местному обменнику) |
-| 🔗 Slash-команды | Альтернативное управление без кнопок |
+| ✈️ Create a trip | Choose the departure and destination countries — the bot finds the currencies and the exchange rate |
+| 💰 Dual balance | The remaining balance is always shown in both currencies |
+| 📝 Expense tracking | Send a number — the bot converts it and asks whether to record it as an expense |
+| 📋 Expense history | Breakdown by date, amount and currency |
+| 🗺 Multiple trips | Switch between trips |
+| 💱 Change the rate | Set the rate manually (for example, the one at a local exchange office) |
+| 🔗 Slash commands | Alternative control without buttons |
 
 ---
 
-## Команды
+## Commands
 
-| Команда | Действие |
+| Command | Action |
 |---------|----------|
-| `/start` | Запустить бота и открыть меню |
-| `/newtrip` | Создать новое путешествие |
-| `/switch` | Переключить активное путешествие |
-| `/balance` | Показать текущий баланс |
-| `/history` | История расходов |
-| `/setrate` | Изменить курс обмена вручную |
+| `/start` | Start the bot and open the menu |
+| `/newtrip` | Create a new trip |
+| `/switch` | Switch the active trip |
+| `/balance` | Show the current balance |
+| `/history` | Expense history |
+| `/setrate` | Change the exchange rate manually |
 
 ---
 
-## Пример работы
+## Example
 
-1. `/start` → выбрать **Создать путешествие**
-2. Ввести страну отправления: `Россия`
-3. Ввести страну назначения: `Италия`
-4. Подтвердить курс (или ввести вручную)
-5. Ввести начальную сумму: `200000`
-6. Бот создаёт кошелёк: `200 000 RUB ≈ 1 923 EUR`
-7. Отправить `100` → бот покажет `100 EUR = 10 400 RUB` и спросит, записать ли расход
+1. `/start` → choose **Create a trip**
+2. Enter the departure country: `Россия` (Russia)
+3. Enter the destination country: `Италия` (Italy)
+4. Confirm the rate (or enter it manually)
+5. Enter the starting amount: `200000`
+6. The bot creates a wallet: `200 000 RUB ≈ 1 923 EUR`
+7. Send `100` → the bot shows `100 EUR = 10 400 RUB` and asks whether to record the expense
 
 ---
 
-## Структура проекта
+## Project structure
 
 ```
 API_travel_currency_bot/
-├── bot.py            # Основной файл: команды, хендлеры, логика диалога
-├── current_api.py    # Запросы к api.exchangerate.host
-├── database.py       # SQLite: пользователи, путешествия, расходы
-├── keyboards.py      # Inline-клавиатуры
-├── countries.py      # Словарь «страна → код валюты»
-├── requirements.txt  # Зависимости Python
-└── .env              # Ключи (не коммитить в git!)
+├── bot.py            # Main file: commands, handlers, dialog logic
+├── current_api.py    # Requests to api.exchangerate.host
+├── database.py       # SQLite: users, trips, expenses
+├── keyboards.py      # Inline keyboards
+├── countries.py      # "country → currency code" dictionary
+├── requirements.txt  # Python dependencies
+└── .env              # Keys (do not commit to git!)
 ```
 
 ---
 
-## Установка и запуск
+## Installation and running
 
-### 1. Создать виртуальное окружение
+### 1. Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-Активация:
+Activate it:
 - **Windows:** `venv\Scripts\activate`
 - **Linux / macOS:** `source venv/bin/activate`
 
-### 2. Установить зависимости
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Настроить `.env`
+### 3. Configure `.env`
 
-В корне проекта должен быть файл `.env`:
+Create a `.env` file in the project root:
 
 ```
-TELEGRAM_BOT_TOKEN=токен_от_BotFather
-API_KEY=ключ_от_exchangerate.host
+TELEGRAM_BOT_TOKEN=token_from_BotFather
+API_KEY=key_from_exchangerate.host
 ```
 
-Где получить ключи:
-- `TELEGRAM_BOT_TOKEN` — у [@BotFather](https://t.me/BotFather) в Telegram
-- `API_KEY` — на [exchangerate.host](https://exchangerate.host) после регистрации (бесплатный план)
+Where to get the keys:
+- `TELEGRAM_BOT_TOKEN` — from [@BotFather](https://t.me/BotFather) in Telegram
+- `API_KEY` — at [exchangerate.host](https://exchangerate.host) after signing up (free plan)
 
-### 4. Запустить
+### 4. Run
 
 ```bash
 python bot.py
@@ -97,17 +101,17 @@ python bot.py
 
 ---
 
-## Технологии
+## Technologies
 
 - **Python 3.10+**
-- [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) — работа с Telegram
-- **SQLite** (встроенный модуль `sqlite3`) — хранение данных
-- **exchangerate.host API** — курсы валют в реальном времени
-- **python-dotenv** — переменные окружения
+- [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) — Telegram integration
+- **SQLite** (built-in `sqlite3` module) — data storage
+- **exchangerate.host API** — real-time exchange rates
+- **python-dotenv** — environment variables
 
 ---
 
-## Поддерживаемые страны (неполный список)
+## Supported countries (partial list)
 
-Россия, США, Германия, Франция, Италия, Испания, Великобритания, Китай, Япония, Южная Корея, Таиланд, Турция, ОАЭ, Индия, Австралия, Канада, Бразилия, Египет, Грузия, Казахстан и многие другие.
-Полный список — в файле [countries.py](countries.py).
+Russia, USA, Germany, France, Italy, Spain, United Kingdom, China, Japan, South Korea, Thailand, Turkey, UAE, India, Australia, Canada, Brazil, Egypt, Georgia, Kazakhstan and many more.
+The full list is in [countries.py](countries.py). Country names are entered in Russian.
